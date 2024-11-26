@@ -12,7 +12,8 @@
         <div th:replace="fragments/general.html :: navigation"> </div>
         <h1>Editar instalacion</h1>
         
-        <form th:action="@{/save}" th:object="${instalacion}" method="post" class="form">
+        <form th:action="@{/instalaciones/save}" th:object="${instalacion}" method="post" class="form">
+            <input type="hidden" th:field="*{id}">
             <div class="form-group">
                 <label for="instalacionNombre">Instalacion:</label>
                 <input type="text" id="instalacionNombre" th:field="*{nombre}" class="form-control">

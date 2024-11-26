@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.iesvdc.acceso.pistas_deportivas.modelos.Instalacion;
-import com.iesvdc.acceso.pistas_deportivas.modelos.Usuario;
 import com.iesvdc.acceso.pistas_deportivas.repos.RepoInstalacion;
 
 
@@ -44,22 +43,25 @@ public class ControInstalacion {
     }
     
     
-    @GetMapping("/{id}/edit")
+    @GetMapping("/edit/{id}")
     public String instalacionEditForm(@PathVariable("id") Long id, Model model) {
         Instalacion instalacion = repoInstalacion.findById(id).get();
-        model.addAttribute(instalacion);
+        model.addAttribute("instalacion", instalacion);
         return "instalacion/instalacion-edit";
     }
 
     
-    @GetMapping("/{id}/del")
-    public String instalacionesDelForm() {
+    @GetMapping("/del/{id}")
+    public String instalacionesDelForm(@PathVariable("id") Long id, Model model) {
+        Instalacion instalacion = repoInstalacion.findById(id).get();
+        model.addAttribute("instalacion", instalacion);
         return "instalacion/instalacion-del";
     }
 
-    @PostMapping("/{id}/del")
-    public String instalacionesDel(@RequestBody String entity) {        
-        return entity;
+    @PostMapping("/del")
+    public String instalacionesDel(@ModelAttribute("instalacion") Instalacion instalacion) {   
+        repoInstalacion.deleteById(instalacion.getId());     
+        return "redirect:/instalaciones";
     }
     
 }
