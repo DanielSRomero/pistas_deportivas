@@ -3,9 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Pistas deportivas</title>
+    <th:block th:include = "fragments/general.html :: headerfiles"></th:block>
+
 </head>
 <body>
-    <h3>aun más pollas</h3>
+    <div class="container-fluid">
+        <div th:replace="fragments/general.html :: navigation"> </div>
+            <h3>Instalaciones</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th><th>Nombre</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="instalacion : ${instalaciones}">
+                        <td th:text="${instalacion.id}">ID</td>
+                        <td th:text="${instalacion.nombre}">Nombre</td>
+                        <td><a class="btn btn-primary" th:href="@{/instalaciones/{id}/edit(id=${instalacion.id})}">Editar</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        <div th:replace = "fragments/general.html :: footer"></div>
+    </div>
 </body>
 </html>

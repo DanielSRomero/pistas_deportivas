@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head th:fragment="headerfiles">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Gestión de pistas deportivas">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/webjars/bootstrap/5.3.3/css/bootstrap.css">
+  <link rel="stylesheet" href="/webjars/webjars/font-awesome/6.6.0/css/all.css">
+</head>
+
+<body>
+  <div th:fragment="navigation">
+    <nav class="navbar navbar-expand-lg bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Pistas deportivas</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Instalaciones
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/instalaciones">Ver instalaciones</a></li>
+                <li><a class="dropdown-item" href="/instalaciones/add">Alta instalacion</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Reservas
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/reservas">Listado reservas</a></li>
+                <li><a class="dropdown-item" href="/reservas/add">Alta reserva</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Usuarios
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/usuarios">Gestión usuarios</a></li>
+                <li><a class="dropdown-item" href="/usuarios/add">Alta usuario</a></li>
+              </ul>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Horarios
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/horarios">Listado horarios</a></li>
+                <li><a class="dropdown-item" href="/horarios/add">Alta horario</a></li>
+              </ul>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+
+  <div th:fragment="footer" class="footer">
+    <p>Copyleft by IES VDC</p>
+    <script src="/webjars/jquery/3.7.1/jquery.js"></script>
+    <script src="/webjars/popper.js/2.11.7/umd/popper.min.js"></script>
+    <script src="/webjars/bootstrap/5.3.3/js/bootstrap.js"></script>
+  </div>
+</body>
+
+</html>
