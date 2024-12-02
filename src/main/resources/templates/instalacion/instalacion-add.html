@@ -10,12 +10,15 @@
 <body>
     <div class="container-fluid">
         <div th:replace="fragments/general.html :: navigation"> </div>
-        <h1>Añadir instalacion</h1>
+        <h3 th:if="${borrando} == null">Añadir una instalacion</h3>
+        <h3 th:if="${borrando} != null">Borrando una instalacion</h3>
         
         <form th:action="@{save}" th:object="${instalacion}" method="post" class="form">
             <div class="form-group">
                 <label for="instalacionNombre">Instalacion:</label>
-                <input type="text" id="instalacionNombre" th:field="*{nombre}" class="form-control">
+                <input type="text" id="instalacionNombre" 
+                th:field="*{nombre}" class="form-control"
+                th:attr="disabled=${borrando} != null ? 'disabled' : null" />
             </div>
             <button type="submit" class="btn btn-primary">Guardar</button>
 

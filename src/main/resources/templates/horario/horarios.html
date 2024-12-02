@@ -10,20 +10,28 @@
 <body>
     <div class="container-fluid">
         <div th:replace="fragments/general.html :: navigation"> </div>
-            <h3>Reservas</h3>
+            <h3>Horarios</h3>
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>#</th><th>Nombre</th>
+
+                        <th>#</th>
+                        <th>Instalacion</th>
+
+                        <th>Hora de inicio</th>
+
+                        <th>Hora de fin</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="reserva : ${reservas}">
-                        <td th:text="${reserva.id}">ID</td>
-                        <td th:text="${reserva.nombre}">Nombre</td>
+                    <tr th:each="horario : ${horarios}">
+                        <td th:text="${horario.id}">ID</td>
+                        <td th:text="${horario.instalacion.nombre}">Instalacion</td>
+                        <td th:text="${horario.horaInicio}">Hora Inicio</td>
+                        <td th:text="${horario.horaFin}">Hora fin</td>
                         <td>
-                            <a class="btn btn-primary" th:href="@{/reservas/edit/{id}(id=${reserva.id})}">Editar</a>
-                            <a class="btn btn-danger" th:href="@{/reservas/del/{id}(id=${reserva.id})}">Eliminar</a>
+                            <a class="btn btn-primary" th:href="@{/horarios/edit/{id}(id=${horario.id})}">Editar</a>
+                            <a class="btn btn-danger" th:href="@{/horarios/del/{id}(id=${horario.id})}">Eliminar</a>
                         </td>
                             
                     </tr>

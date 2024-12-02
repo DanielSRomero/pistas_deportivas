@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pistas Deportivas</title>
+    <th:block th:include = "fragments/general.html :: headerfiles"></th:block>
+</head>
+<body>
+    <div class="container-fluid">
+        <div th:replace="fragments/general.html :: navigation"> </div>
+
+        <!--Segun la operacion ADD, DEL, EDIT-->
+        <!-- JAMAS SE HACE ASI
+        <h3 th:text="${operacion}=='ADD' ? 'Añadir un nuevo horario':
+         (${operacion}=='DEL' ? 'Borrando un horario' : 'Editando un horario')"></h3>
+         -->
+
+        <h3 th:switch="${operacion}">
+            <span th:case="ADD">Añadir un nuevo horario</span>
+            <span th:case="EDIT">Editando un horario</span>
+            <span th:case="DEL">Borrando un horario</span>
+            <span th:case="*">Operacion no soportada</span>
+
+        </h3>
+
+        <form method="post" th:object="${horario}" class="needs-validation" novalidate>
+            <input type="number" hidden name="id" th:value="${horario.id}" />
+        
+            <div class="mb-3">
+                <select th:field="*{instalacion}" id="instalacion" class="select">
+                    <option 
+                    th:each="instalacion : ${instalaciones}"
+                    th:text="${instalacion.nombre}"
+                    th:value="${instalacion.id}"></option>
+                </select>
+                <label for="horaInicio">Inicio</label>
+                <input th:field="*{horaInicio}" id="horaInicio" type="time" />
+                <label for="horaFin">Fin</label>
+                <input th:field="*{horaFin}" id="horaFin" type="time" />
+            </div>
+        
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+        
+        <div th:replace = "fragments/general.html :: footer"></div>
+    </div>
+</body>
+</html>

@@ -17,9 +17,10 @@ public class Usuario {
     private Long id;
     @Column(nullable = false, unique = true, length = 20)
     private String username;
-    @Column(nullable = false, length = 65)
+    @Column(nullable = false, length = 80)
     private String password;
     @Column(nullable = false, unique = true, length = 80)
     private String email;
+    private boolean enabled;
     private Rol tipo;
 }
