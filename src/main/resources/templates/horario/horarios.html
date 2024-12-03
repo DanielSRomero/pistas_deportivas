@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pistas deportivas</title>
     <th:block th:include = "fragments/general.html :: headerfiles"></th:block>
-
 </head>
 <body>
     <div class="container-fluid">
@@ -17,10 +16,11 @@
 
                         <th>#</th>
                         <th>Instalacion</th>
-
                         <th>Hora de inicio</th>
-
                         <th>Hora de fin</th>
+                        <th>Editar</th>
+                        <th>Borrar</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -31,13 +31,30 @@
                         <td th:text="${horario.horaFin}">Hora fin</td>
                         <td>
                             <a class="btn btn-primary" th:href="@{/horarios/edit/{id}(id=${horario.id})}">Editar</a>
+                        </td>
+                        <td>
                             <a class="btn btn-danger" th:href="@{/horarios/del/{id}(id=${horario.id})}">Eliminar</a>
                         </td>
                             
                     </tr>
                 </tbody>
             </table>
-        <div th:replace = "fragments/general.html :: footer"></div>
-    </div>
+            <div>
+                <p>
+                    <span th:if="${page.hasPrevious()}">
+                        <a class="btn btn-success" th:href="|/horarios?page=${page.number - 1}|" >
+                            <i class="fa-solid fa-chevron-left"><</i>
+                        </a> 
+                    </span>
+                    Página <span th:text="|Estás en la página ${page.number} de ${page.totalPages}|"></span>
+                    <span th:if="${page.hasNext()}">
+                        <a class="btn btn-success" th:href="|/horarios?page=${page.number + 1}|">
+                            <i class="fa-solid fa-chevron-right">></i>
+                        </a> 
+                    </span>
+                </p>
+            </div>
+            <div th:replace = "fragments/general.html :: footer"></div>
+        </div>
 </body>
 </html>

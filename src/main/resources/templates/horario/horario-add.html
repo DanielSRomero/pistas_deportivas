@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pistas Deportivas</title>
+    <title>Pistas deportivas</title>
     <th:block th:include = "fragments/general.html :: headerfiles"></th:block>
 </head>
 <body>
@@ -25,25 +25,43 @@
         </h3>
 
         <form method="post" th:object="${horario}" class="needs-validation" novalidate>
-            <input type="number" hidden name="id" th:value="${horario.id}" />
+            <input type="number" th:field="*{id}" th:value="${horario.id}" hidden />
         
             <div class="mb-3">
-                <select th:field="*{instalacion}" id="instalacion" class="select">
+                <select 
+                th:field="*{instalacion}"
+                id="instalacion"
+                th:attr="disabled=${operacion}=='DEL' ? 'disabled' : null"
+                class="select">
                     <option 
                     th:each="instalacion : ${instalaciones}"
                     th:text="${instalacion.nombre}"
                     th:value="${instalacion.id}"></option>
                 </select>
+
+
                 <label for="horaInicio">Inicio</label>
-                <input th:field="*{horaInicio}" id="horaInicio" type="time" />
+                <input 
+                id="horaInicio" 
+                name="horaInicio"
+                type="text"
+                th:field="*{horaInicio}"
+                th:value="${horario.horaInicio}"
+                th:attr="disabled=${operacion}=='DEL' ? 'disabled' : null" />
                 <label for="horaFin">Fin</label>
-                <input th:field="*{horaFin}" id="horaFin" type="time" />
+                <input 
+                id="horaFin" 
+                name="horaFin"
+                type="text"
+                th:field="*{horaFin}"
+                th:value="${horario.horaFin}"
+                th:attr="disabled=${operacion}=='DEL' ? 'disabled' : null" />
             </div>
         
             <button type="submit" class="btn btn-primary">Enviar</button>
         </form>
         
-        <div th:replace = "fragments/general.html :: footer"></div>
+        <div th:replace="fragments/general.html :: footer"></div>
     </div>
 </body>
 </html>

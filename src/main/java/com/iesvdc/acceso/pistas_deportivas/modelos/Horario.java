@@ -19,6 +19,6 @@ public class Horario {
     private Long id;
     @ManyToOne
     private Instalacion instalacion;
-    private LocalTime horaInicio;
+    private LocalTime horaInicio;    
     private LocalTime horaFin;
 }

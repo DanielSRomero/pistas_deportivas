@@ -32,11 +32,12 @@ public class ControInstalacion {
     
     @GetMapping("/add")
     public String instalacionesAddForm(Model model) {
+        model.addAttribute("operacion", "ADD");
         model.addAttribute("instalacion", new Instalacion());
         return "instalacion/instalacion-add";
     }
 
-    @PostMapping("/save")
+    @PostMapping("/add")
     public String instalacionesAdd(@ModelAttribute("instalacion") Instalacion instalacion) { 
         repoInstalacion.save(instalacion);       
         return "redirect:/instalaciones";
@@ -47,26 +48,42 @@ public class ControInstalacion {
     public String instalacionEditForm(@PathVariable("id") Long id, Model model) {
         Optional<Instalacion> oInstalacion = repoInstalacion.findById(id);
         if (oInstalacion.isPresent()) {
+            model.addAttribute("operacion", "EDIT");
             model.addAttribute("instalacion", oInstalacion.get());
+            model.addAttribute("instalaciones", repoInstalacion.findAll());
             return "instalacion/instalacion-add";
         } else {
-            model.addAttribute("mensaje", "La instalación no exsiste");
-            model.addAttribute("titulo", "Error editando instalación.");
+            model.addAttribute("mensaje", "La instalacion no existe");
+            model.addAttribute("titulo", "Error editando instalacion.");
             return "/error";
         }
     }
 
+    @PostMapping("/edit/{id}")
+    public String editInstalacion(
+        @ModelAttribute("instalacion") Instalacion instalacion)  {
+        repoInstalacion.save(instalacion);
+        return "redirect:/instalaciones";
+    }
     
     @GetMapping("/del/{id}")
     public String instalacionesDelForm(@PathVariable("id") Long id, Model model) {
-        Instalacion instalacion = repoInstalacion.findById(id).get();
-        model.addAttribute("instalacion", instalacion);
-        return "instalacion/instalacion-del";
+        Optional<Instalacion> oInstalacion = repoInstalacion.findById(id);
+        if (oInstalacion.isPresent()) {
+            model.addAttribute("operacion", "DEL");
+            model.addAttribute("instalacion", oInstalacion.get());
+            model.addAttribute("instalaciones", repoInstalacion.findAll());
+            return "instalacion/instalacion-add";
+        } else {
+            model.addAttribute("mensaje", "La instalacion no existe");
+            model.addAttribute("titulo", "Error borrando instalacion.");
+            return "/error";
+        }
     }
 
-    @PostMapping("/del")
-    public String instalacionesDel(@ModelAttribute("instalacion") Instalacion instalacion) {   
-        repoInstalacion.deleteById(instalacion.getId());     
+    @PostMapping("/del/{id}")
+    public String instalacionesDel(Instalacion instalacion) {   
+        repoInstalacion.delete(instalacion);     
         return "redirect:/instalaciones";
     }
     
